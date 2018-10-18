@@ -30,7 +30,9 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        calendarCollectionView.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.moveCurrentSetMonth()
+        }
     }
     
     private func moveCurrentSetMonth(){
@@ -119,7 +121,6 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
             monthVC.view.layoutIfNeeded()
             monthVC.collectionView.reloadData()
         }
-        
         
         return cell
     }

@@ -71,6 +71,11 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("month - \(indexPath.row)")
+    }
+    
+    
     func setloyoutView(_ frame:CGRect) {
 //        let width = frame.width/7 - 10
 //        let height: CGFloat = frame.height/7 - 10
