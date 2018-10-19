@@ -13,6 +13,10 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
     
+    override func viewWillLayoutSubviews() {
+        //self.collectionView.reloadData()
+    }
+    
     func setinit(month:GSCalendarMonthModel) {
         
         self.month = month
@@ -67,7 +71,7 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
             cell.date.textColor = UIColor.black
             cell.date.alpha = 0.5
         }
-    
+        
         return cell
     }
     
@@ -87,8 +91,8 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (self.view.frame.width)/7
-        let height: CGFloat = self.view.frame.height/7 - 10
+        let width = floor((collectionView.frame.size.width)/7)
+        let height: CGFloat = floor(collectionView.frame.size.height/7 - 10)
         return CGSize(width: width, height: height)
     }
 }

@@ -30,6 +30,7 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        calendarCollectionView.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.moveCurrentSetMonth()
         }
@@ -62,7 +63,6 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     private func setCurrentMonth (_ index:Int){
         
         if index != calendar.currentIndex {
-            
             calendar.setCurrent(index)
             setTitle()
             
