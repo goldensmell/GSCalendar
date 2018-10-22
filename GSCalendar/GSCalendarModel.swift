@@ -19,27 +19,20 @@ class GSCalendarModel: NSObject {
         // 기준의 날짜로부터 +- 6개월 데이터 셋팅
         for i in -6..<6 {
             let thisDate:Date = currentDate.moveMonthFromDate(move: i)
-            
+
             let month = GSCalendarMonthModel()
             month.initDate(SetDate: thisDate)
             months.append(month)
         }
-        
+
         currentIndex = 6
-    }
-    
-    public func addBeforeMonth(){
-//        for i in (-6..<0).reversed() {
-//            let thisDate:Date = currentDate.moveMonthFromDate(move: i)
-//
-//            let month = GSCalendarMonthModel()
-//            month.initDate(SetDate: thisDate)
-//            months.append(month)
-//        }
-    }
-    
-    public func addAfterMonth(){
         
+        //TEST CODE
+//        let month = GSCalendarMonthModel()
+//        month.initDate(SetDate: currentDate)
+//        months.append(month)
+//
+//        currentIndex = 0
     }
     
     public func setCurrent(_ index:Int){

@@ -18,26 +18,28 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     
     var calendar :GSCalendarModel = GSCalendarModel()
     
+    var monthVieweControllers:[GSCalendarMonthCollectionViewController?] = Array<GSCalendarMonthCollectionViewController>()
+    
     override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         setDayUI()
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         moveToday()
+        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+
+        super.viewWillTransition(to: size, with: coordinator)
+        
         calendarCollectionView.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.moveCurrentSetMonth()
         }
-    }
-    
-    private func moveCurrentSetMonth(){
-        calendarCollectionView.scrollToItem(at: IndexPath(item: calendar.currentIndex, section: 0), at:[.centeredVertically, .centeredHorizontally], animated: false)
     }
     
     private func moveToday(){
@@ -46,11 +48,15 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     private func setInitDate(_ date:Date){
+       
         calendar.initDate(date: date)
+        for _ in 0..<calendar.months.count {
+            monthVieweControllers.append(nil)
+        }
+        
         setTitle()
         
         calendarCollectionView.reloadData()
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.moveCurrentSetMonth()
         }
@@ -83,14 +89,30 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
         seven.text = calendar.getDayString(5)
     }
     
+    private func moveCurrentSetMonth(){
+        calendarCollectionView.scrollToItem(at: IndexPath(item: calendar.currentIndex, section: 0), at:[.centeredVertically, .centeredHorizontally], animated: false)
+    }
+    
+    //TESTCODE
+//    private func setCalendarMonthViewController(Frame addframe:CGRect, Index index:Int) {
+//
+//        if let monthVC = self.storyboard?.instantiateViewController(withIdentifier: "GSCalendarMonthCollectionViewController") as? GSCalendarMonthCollectionViewController {
+//            monthVC.setinit(month: calendar.months[index])
+//            monthVC.view.frame = addframe
+//
+//            self.view.addSubview(monthVC.view)
+//
+//        }
+//    }
+    
+    //MARK: - ACTION METHOD
+    
     @IBAction func moveToday(_ sender: UIButton) {
         moveToday()
     }
     
-    //MARK: - COLLECTION VIEW DELEGATE
-    
+    //MARK: - COLLECTION VIEW METHOD
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return calendar.months.count
     }
     
@@ -108,15 +130,15 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
         for v in cell.subviews {
             v.removeFromSuperview()
         }
-        
+
         if let monthVC = self.storyboard?.instantiateViewController(withIdentifier: "GSCalendarMonthCollectionViewController") as? GSCalendarMonthCollectionViewController {
-            
             monthVC.setinit(month: calendar.months[indexPath.row])
             var frame = collectionView.frame
             frame.origin.x = 0
             frame.origin.y = 0
             monthVC.view.frame = frame
-            
+
+            monthVieweControllers[indexPath.row] = monthVC
             cell.addSubview(monthVC.view)
             monthVC.view.layoutIfNeeded()
             monthVC.collectionView.reloadData()
@@ -124,10 +146,10 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
         
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("\(indexPath.row)")
-    }
+
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        print("\(indexPath.row)")
+//    }
     
     //MARK: - SCROLLVIEW DELEGATE
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

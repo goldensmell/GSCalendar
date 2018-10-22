@@ -11,6 +11,8 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
 
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+
+       // self.view.layoutIfNeeded()
     }
     
     override func viewWillLayoutSubviews() {
@@ -25,8 +27,15 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
     }
 
     // MARK: UICollectionViewDataSource
-
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = floor((collectionView.frame.size.width)/7)
+        let height: CGFloat = floor(collectionView.frame.size.height/7)
+        return CGSize(width: width, height: height)
+    }
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        print("numberOfSections")
         return 1
     }
 
@@ -35,7 +44,7 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+        print("cellForItemAt - \(indexPath.row)")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GSCalendarMonthCollectionViewCell", for: indexPath) as! GSCalendarMonthCollectionViewCell
         // Configure the cell
         
@@ -75,31 +84,22 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        print("didHighlightItemAt - \(indexPath.row)")
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+            print("shouldSelectItemAt - \(indexPath.row)")
+        return true
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("month - \(indexPath.row)")
-    }
-    
-    
-    func setloyoutView(_ frame:CGRect) {
-//        let width = frame.width/7 - 10
-//        let height: CGFloat = frame.height/7 - 10
-//
-//        self.collectionViewLayout = CGSize(width: width, height: height)
-//
-//        self.view.layoutIfNeeded()
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = floor((collectionView.frame.size.width)/7)
-        let height: CGFloat = floor(collectionView.frame.size.height/7 - 10)
-        return CGSize(width: width, height: height)
+        print("didSelectItemAt - \(indexPath.row)")
     }
 }
 
 class GSCalendarMonthCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var date: UILabel!
-    
     
 }
