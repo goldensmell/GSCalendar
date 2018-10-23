@@ -214,20 +214,29 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hTx-sO-MRf">
-                                            <rect key="frame" x="36" y="29.5" width="8" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="5" y="5" width="8" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vw8-2o-fZX">
+                                            <rect key="frame" x="17" y="5" width="13" height="12"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="hTx-sO-MRf" firstAttribute="centerY" secondItem="34O-8R-vnf" secondAttribute="centerY" id="Rxh-ES-XKb"/>
-                                    <constraint firstItem="hTx-sO-MRf" firstAttribute="centerX" secondItem="34O-8R-vnf" secondAttribute="centerX" id="gfK-AU-rGS"/>
+                                    <constraint firstItem="Vw8-2o-fZX" firstAttribute="leading" secondItem="hTx-sO-MRf" secondAttribute="trailing" constant="4" id="7rr-VO-bAS"/>
+                                    <constraint firstItem="Vw8-2o-fZX" firstAttribute="top" secondItem="hTx-sO-MRf" secondAttribute="top" id="I9Y-lS-cAc"/>
+                                    <constraint firstItem="hTx-sO-MRf" firstAttribute="leading" secondItem="34O-8R-vnf" secondAttribute="leading" constant="5" id="RfQ-Sm-ABf"/>
+                                    <constraint firstItem="hTx-sO-MRf" firstAttribute="top" secondItem="34O-8R-vnf" secondAttribute="top" constant="5" id="e7Y-P3-WtV"/>
                                 </constraints>
                                 <size key="customSize" width="80" height="80"/>
                                 <connections>
                                     <outlet property="date" destination="hTx-sO-MRf" id="e0Y-0b-hOi"/>
+                                    <outlet property="lunarDay" destination="Vw8-2o-fZX" id="hpU-CQ-r8M"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -239,7 +248,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sI3-Fg-gY9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2063" y="-564"/>
+            <point key="canvasLocation" x="2061.5999999999999" y="-564.46776611694156"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gGe-6k-Y8T">

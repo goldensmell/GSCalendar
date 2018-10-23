@@ -35,16 +35,15 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        print("numberOfSections")
         return 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return month.getDateOfMonth()
+        return month.displayTotalDate
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("cellForItemAt - \(indexPath.row)")
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GSCalendarMonthCollectionViewCell", for: indexPath) as! GSCalendarMonthCollectionViewCell
         // Configure the cell
         
@@ -52,54 +51,58 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
 //        cell.layer.borderWidth = 1
 //        cell.layer.borderColor = UIColor.black.cgColor
 
-        let (isThisMonth, day) = month.getDay(indexPath.row)
+        let (isThisMonth, solar, lunar) = month.getDay(indexPath.row)
 //
 //        cell.isThisMonth = isHidden
-        cell.date.text = day
+        cell.date.text = solar
+        cell.lunarDay.text = lunar
         cell.date.alpha = 1
+        cell.lunarDay.alpha = 1
         
         // 일요일
         if isThisMonth == true {
-            if(month.checkSunday(Int(day)!) == true) {
+            if(month.checkSunday(Int(solar)!) == true) {
                 cell.date.textColor = UIColor.red
             }
             // 토요일
-            else if(month.checkSaturday(Int(day)!) == true) {
+            else if(month.checkSaturday(Int(solar)!) == true) {
                 cell.date.textColor = UIColor.blue
             }else {
                 cell.date.textColor = UIColor.black
             }
 
-            // 오늘 날짜
-            if(month.checkCurrentDay(Int(day)!) == true) {
-                cell.date.textColor = UIColor.white
-                cell.backgroundColor = UIColor.gray
-            }
+            //TODO: 오늘 날짜
+//            if(month.checkCurrentDay(Int(day)!) == true) {
+//                cell.date.textColor = UIColor.white
+//                cell.backgroundColor = UIColor.gray
+//            }
         }
         if isThisMonth == false {
             cell.date.textColor = UIColor.black
             cell.date.alpha = 0.5
+            cell.lunarDay.alpha = 0.5
         }
         
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        print("didHighlightItemAt - \(indexPath.row)")
+        //print("didHighlightItemAt - \(indexPath.row)")
     }
     
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-            print("shouldSelectItemAt - \(indexPath.row)")
+            //print("shouldSelectItemAt - \(indexPath.row)")
         return true
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("didSelectItemAt - \(indexPath.row)")
+        //print("didSelectItemAt - \(indexPath.row)")
     }
 }
 
 class GSCalendarMonthCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var lunarDay: UILabel!
     
 }

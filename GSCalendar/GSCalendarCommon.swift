@@ -54,4 +54,8 @@ extension String {
     var date: Date? {
         return String.dateFormatter.date(from: self)
     }
+    
+    subscript (i: Int) -> Character {
+        return self[index(startIndex, offsetBy: i)]
+    }
 }
