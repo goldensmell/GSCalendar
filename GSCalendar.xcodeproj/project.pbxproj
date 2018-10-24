@@ -107,8 +107,8 @@
 				DA2346802154B5DD00ADBABF /* ViewController.swift */,
 				DA09820D216F0E42004978EC /* GSCalendarCommon.swift */,
 				DA2346AC2154B71E00ADBABF /* GSCalendarViewController.swift */,
-				DA09820F216F1C7C004978EC /* GSCalendarModel.swift */,
 				DA098209216F0ADD004978EC /* GSCalendarMonthCollectionViewController.swift */,
+				DA09820F216F1C7C004978EC /* GSCalendarModel.swift */,
 				DA09820B216F0DC7004978EC /* GSCalendarMonthModel.swift */,
 				DAF57E0A217FFE9B00BCE5A6 /* LunarDataManage.swift */,
 				DA2346822154B5DD00ADBABF /* Calendar.storyboard */,
@@ -441,8 +441,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T29BN4NUF2;
 				INFOPLIST_FILE = GSCalendar/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -462,8 +462,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T29BN4NUF2;
 				INFOPLIST_FILE = GSCalendar/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = (

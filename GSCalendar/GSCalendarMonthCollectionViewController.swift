@@ -61,8 +61,6 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
         }else {
             cell.lunarDay.text = ""
         }
-        cell.date.alpha = 1
-        cell.lunarDay.alpha = 1
         
         // 일요일
         if isThisMonth == true {
@@ -83,9 +81,8 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
 //            }
         }
         if isThisMonth == false {
-            cell.date.textColor = UIColor.black
-            cell.date.alpha = 0.5
-            cell.lunarDay.alpha = 0.5
+            cell.date.textColor = UIColor.lightGray
+            
         }
         
         return cell

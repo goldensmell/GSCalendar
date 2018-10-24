@@ -76,14 +76,6 @@ class GSCalendarMonthModel: NSObject {
         return "\(currentYear)-\(currentMonth)-01".date!
     }
     
-    // 해당 월의 타이틀 스트링
-    public func getMonthString() -> String{
-        
-        let result = "\(currentYear) \(GSCalendarCommon.MonthStrings[currentMonth - 1])"
-        
-        return result
-    }
-    
     private func getRealDateOfMonth() -> Int{
         return numOfDaysInMonth[currentMonth-1]
     }

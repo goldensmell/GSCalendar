@@ -2,10 +2,6 @@ import UIKit
 
 class GSCalendarCommon: NSObject {
     // MARK: - static data
-    // 윤달 계산으로 인하여 var로 선언
-    static let MonthStrings = ["January", "February","March","Aprill","May","June","July","August","September","October","November","December"]
-    static let DayStrings = ["Mon","Tue","Wen","Thu","Fri","Sat","Sun"]
-    //["Monday", "Tuesday", "Wendnesday","Thursday","Friday","Saturday","Sunday"]
 }
 
 //get first day of the month

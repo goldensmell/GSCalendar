@@ -28,7 +28,9 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setCalendarInit()
+        initCalendar()
+        
+        moveToday()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -41,9 +43,13 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
         }
     }
     
-    private func setCalendarInit(){
+    //TESTCODE
+    private func initCalendar(){
+         calendar.initLunarData() // 음력 데이터 초기화
+    }
+    public func initCalendar(Calendar calendar:GSCalendarModel){
+        self.calendar = calendar
         calendar.initLunarData() // 음력 데이터 초기화
-        moveToday()
     }
     
     private func moveToday(){
@@ -98,7 +104,6 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
         calendarCollectionView.scrollToItem(at: IndexPath(item: calendar.currentIndex, section: 0), at:[.centeredVertically, .centeredHorizontally], animated: false)
     }
     
-    //TESTCODE
     private func getMonthVC(Index index:Int) -> GSCalendarMonthCollectionViewController?{
 
         

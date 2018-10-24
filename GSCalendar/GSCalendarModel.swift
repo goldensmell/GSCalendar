@@ -4,6 +4,12 @@ class GSCalendarModel: NSObject {
     
     var months = Array<GSCalendarMonthModel>()
     
+    var monthStrings = ["January", "February","March","Aprill","May","June","July","August","September","October","November","December"]
+    var dayStrings = ["Mon","Tue","Wen","Thu","Fri","Sat","Sun"]
+    //["Monday", "Tuesday", "Wendnesday","Thursday","Friday","Saturday","Sunday"]
+    var useLunar: Bool = true
+    var useDisplayOverMonth:Bool = true
+    
     var currentDate = Date()
     var currentIndex = 6 // 컨트롤러에 보여지는 데이터 인덱스 ; 초기화시 오늘 날짜
     
@@ -32,13 +38,6 @@ class GSCalendarModel: NSObject {
         }
 
         currentIndex = 12
-        
-        //TEST CODE
-//        let month = GSCalendarMonthModel()
-//        month.initDate(SetDate: currentDate)
-//        months.append(month)
-//
-//        currentIndex = 0
     }
     
     public func initLunarDataToMonth(_ index:Int) {
@@ -53,13 +52,16 @@ class GSCalendarModel: NSObject {
     
     // 현재 인덱스의 Title
     public func getCurrentMonthString() -> String {
-        return months[currentIndex].getMonthString()
+        let year = months[currentIndex].currentYear
+        let month = months[currentIndex].currentMonth
+        
+        return "\(year) \(monthStrings[month-1])"
     }
     
     // 요일 스트링
     public func getDayString(_ index:Int) -> String {
         
-        return GSCalendarCommon.DayStrings[index]
+        return dayStrings[index]
     }
 }
 
