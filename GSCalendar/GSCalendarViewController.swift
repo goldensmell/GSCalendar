@@ -28,8 +28,7 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        moveToday()
-        
+        setCalendarInit()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -42,12 +41,17 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
         }
     }
     
-    private func moveToday(){
-        let now = Date()
-        setInitDate(now)
+    private func setCalendarInit(){
+        calendar.initLunarData() // 음력 데이터 초기화
+        moveToday()
     }
     
-    private func setInitDate(_ date:Date){
+    private func moveToday(){
+        let now = Date()
+        setCalendarData(now)
+    }
+    
+    private func setCalendarData(_ date:Date){
        
         calendar.initDate(date: date)
         for _ in 0..<calendar.months.count {
@@ -67,15 +71,16 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     private func setCurrentMonth (_ index:Int){
-        
         if index != calendar.currentIndex {
             calendar.setCurrent(index)
             setTitle()
-            
-            if ( (index == 0) || (index == (calendar.months.count-1)) ){
-                setInitDate(calendar.currentDate)
-                return
-            }
+        }
+    }
+    
+    private func reloadCalendarData(_ index:Int){
+        if ( (index == 0) || (index == (calendar.months.count-1)) ){
+            setCalendarData(calendar.currentDate)
+            return
         }
     }
     
@@ -94,16 +99,24 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     //TESTCODE
-//    private func setCalendarMonthViewController(Frame addframe:CGRect, Index index:Int) {
-//
-//        if let monthVC = self.storyboard?.instantiateViewController(withIdentifier: "GSCalendarMonthCollectionViewController") as? GSCalendarMonthCollectionViewController {
-//            monthVC.setinit(month: calendar.months[index])
-//            monthVC.view.frame = addframe
-//
-//            self.view.addSubview(monthVC.view)
-//
-//        }
-//    }
+    private func getMonthVC(Index index:Int) -> GSCalendarMonthCollectionViewController?{
+
+        
+        if let monthVC = self.storyboard?.instantiateViewController(withIdentifier: "GSCalendarMonthCollectionViewController") as? GSCalendarMonthCollectionViewController {
+//            monthVC.setLunarDatas(index)
+            calendar.initLunarDataToMonth(index)
+            monthVC.setinit(month: calendar.months[index])
+            var frame = calendarCollectionView.frame
+            frame.origin.x = 0
+            frame.origin.y = 0
+            monthVC.view.frame = frame
+            
+            monthVieweControllers[index] = monthVC
+            return monthVC
+        }
+        
+        return nil
+    }
     
     //MARK: - ACTION METHOD
     
@@ -131,14 +144,7 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
             v.removeFromSuperview()
         }
 
-        if let monthVC = self.storyboard?.instantiateViewController(withIdentifier: "GSCalendarMonthCollectionViewController") as? GSCalendarMonthCollectionViewController {
-            monthVC.setinit(month: calendar.months[indexPath.row])
-            var frame = collectionView.frame
-            frame.origin.x = 0
-            frame.origin.y = 0
-            monthVC.view.frame = frame
-
-            monthVieweControllers[indexPath.row] = monthVC
+        if let monthVC = getMonthVC(Index: indexPath.row) {
             cell.addSubview(monthVC.view)
             monthVC.view.layoutIfNeeded()
             monthVC.collectionView.reloadData()
@@ -153,6 +159,18 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     
     //MARK: - SCROLLVIEW DELEGATE
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        let visibleRect = CGRect(origin: calendarCollectionView.contentOffset, size: calendarCollectionView.bounds.size)
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        if let visibleIndexPath = calendarCollectionView.indexPathForItem(at: visiblePoint) {
+            
+            // set current index
+            self.setCurrentMonth(visibleIndexPath.row)
+            self.reloadCalendarData(visibleIndexPath.row)
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let visibleRect = CGRect(origin: calendarCollectionView.contentOffset, size: calendarCollectionView.bounds.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
         if let visibleIndexPath = calendarCollectionView.indexPathForItem(at: visiblePoint) {

@@ -11,8 +11,14 @@ class GSCalendarMonthModel: NSObject {
     
     var displayTotalDate:Int = 0 // 달력에 표시될 총 날짜
     
-    var days = [""] // 양력 날짜
-    var lunarDays = [""] // 음력 날짜
+    var days:Array<Date> = [Date]() // 양력 날짜
+    var lunarDays:Array<String?>? // 음력 날짜
+    
+    enum MonthType {
+        case Before
+        case Current
+        case Next
+    }
     
     func initDate(SetDate date:Date) {
         
@@ -29,16 +35,20 @@ class GSCalendarMonthModel: NSObject {
         
         //표시될 날짜 리스트 생성
         days.removeAll()
-        lunarDays.removeAll()
-        
-        for i in 0..<displayTotalDate {
-            let  solar = getSolarDayString(i)
-            let  lunar = getLunarDayString(i)
-            days.append(solar)
-            lunarDays.append(lunar)
-        }
+        setSolarDates()
         
         currentDay = Calendar.current.component(.day, from: date)
+    }
+    
+    private func setSolarDates(){
+        for i in 0..<displayTotalDate {
+            let  solar = getSolarDay(i)
+            days.append(solar)
+        }
+    }
+    
+    public func setLunarDates(_ list:Array<String>){
+        lunarDays = list
     }
     
     // 해당 월의 1일의 요일 계산
@@ -69,7 +79,7 @@ class GSCalendarMonthModel: NSObject {
     // 해당 월의 타이틀 스트링
     public func getMonthString() -> String{
         
-        let result = "\(currentYear) \(GSCalendarCommon.months[currentMonth - 1])"
+        let result = "\(currentYear) \(GSCalendarCommon.MonthStrings[currentMonth - 1])"
         
         return result
     }
@@ -78,70 +88,81 @@ class GSCalendarMonthModel: NSObject {
         return numOfDaysInMonth[currentMonth-1]
     }
     
-    // 양력 / 음력 표시될 날짜 출력
-    private func getSolarDayString(_ index:Int) -> (String) {
-        var solar = ""
-        var date = Date()
+    private func checkMonthType(_ index:Int) -> MonthType {
+        var monthType:MonthType = .Current
         
         if(index <= firstWeekDayOfMonth - 2){
-            let diffDateNum = index - firstWeekDayOfMonth + 2 - 1
-            let firstDate = "\(currentYear)-\(currentMonth)-1"
-            date = ("\(firstDate)".date?.addDayFromDate(addDay: diffDateNum))!
-            solar = "\(date.dayOfThisDate())"
-            
+           monthType = .Before
         }else if(index > numOfDaysInMonth[currentMonth-1] + firstWeekDayOfMonth - 2){
-            let diffDateNum = index - (numOfDaysInMonth[currentMonth-1] + firstWeekDayOfMonth - 2)
-            let lastDate = "\(currentYear)-\(currentMonth)-\(getRealDateOfMonth())"
-            date = ("\(lastDate)".date?.addDayFromDate(addDay: diffDateNum))!
-            solar = "\(date.dayOfThisDate())"
-        }else {
-            let calcDate = index-firstWeekDayOfMonth+2
-            solar = "\(calcDate)"
+            monthType = .Next
         }
-       
-        return solar
+        
+        return monthType
     }
     
-    private func getLunarDayString(_ index:Int) -> (String) {
-        var lunar = ""
+    // 양력 날짜데이터 얻기
+    private func getSolarDay(_ index:Int) -> Date {
         var date = Date()
         
-        if(index <= firstWeekDayOfMonth - 2){
+        switch checkMonthType(index) {
+        case .Before:
             let diffDateNum = index - firstWeekDayOfMonth + 2 - 1
             let firstDate = "\(currentYear)-\(currentMonth)-1"
             date = ("\(firstDate)".date?.addDayFromDate(addDay: diffDateNum))!
-            
-        }else if(index > numOfDaysInMonth[currentMonth-1] + firstWeekDayOfMonth - 2){
+        case .Current:
+            let calcDate = index-firstWeekDayOfMonth+2
+            date = ("\(currentYear)-\(currentMonth)-\(calcDate)".date)!
+        case .Next:
             let diffDateNum = index - (numOfDaysInMonth[currentMonth-1] + firstWeekDayOfMonth - 2)
             let lastDate = "\(currentYear)-\(currentMonth)-\(getRealDateOfMonth())"
             date = ("\(lastDate)".date?.addDayFromDate(addDay: diffDateNum))!
-        }else {
-            let calcDate = index-firstWeekDayOfMonth+2
-            date = ("\(currentYear)-\(currentMonth)-\(calcDate)".date)!
         }
-        
-        let lunarManage = Lunar()
-        let lunarDateDic = lunarManage.solar2lunar(solar_date: date)
-        lunar = "\(lunarDateDic["month"]!).\(lunarDateDic["day"]!)"
-        
-        return lunar
+       
+        return date
     }
+    
+    
+//    private func getLunarDayString(_ index:Int) -> (String) {
+//        var lunar = ""
+//        var date = Date()
+//
+//        if(index <= firstWeekDayOfMonth - 2){
+//            let diffDateNum = index - firstWeekDayOfMonth + 2 - 1
+//            let firstDate = "\(currentYear)-\(currentMonth)-1"
+//            date = ("\(firstDate)".date?.addDayFromDate(addDay: diffDateNum))!
+//
+//        }else if(index > numOfDaysInMonth[currentMonth-1] + firstWeekDayOfMonth - 2){
+//            let diffDateNum = index - (numOfDaysInMonth[currentMonth-1] + firstWeekDayOfMonth - 2)
+//            let lastDate = "\(currentYear)-\(currentMonth)-\(getRealDateOfMonth())"
+//            date = ("\(lastDate)".date?.addDayFromDate(addDay: diffDateNum))!
+//        }else {
+//            let calcDate = index-firstWeekDayOfMonth+2
+//            date = ("\(currentYear)-\(currentMonth)-\(calcDate)".date)!
+//        }
+//
+//        let lunarManage = Lunar()
+//        let lunarDateDic = lunarManage.solar2lunar(solar_date: date)
+//        lunar = "\(lunarDateDic["month"]!).\(lunarDateDic["day"]!)"
+//
+//        return lunar
+//    }
     
     
     
     // 표시할 날짜
-    public func getDay(_ index:Int) -> (Bool,String,String) {
+    public func getDay(_ index:Int) -> (Bool,String,String?) {
         
         var isThisMonth = false
-        let solar = days[index]
-        let lunar = lunarDays[index]
+        let solar = "\(days[index].dayOfThisDate())"
+        var lunar = ""
+        if let lunarDate = lunarDays?[index]?.date {
+            lunar = "\(lunarDate.monthOfThisDate()).\(lunarDate.dayOfThisDate())"
+        }
         
         if(index > firstWeekDayOfMonth - 2 && index <= numOfDaysInMonth[currentMonth-1] + firstWeekDayOfMonth - 2){
             
              isThisMonth = true
         }
-        
-        
         
         return (isThisMonth,solar, lunar)
     }

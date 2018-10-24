@@ -52,10 +52,15 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
 //        cell.layer.borderColor = UIColor.black.cgColor
 
         let (isThisMonth, solar, lunar) = month.getDay(indexPath.row)
+        
 //
 //        cell.isThisMonth = isHidden
         cell.date.text = solar
-        cell.lunarDay.text = lunar
+        if let realLunar = lunar {
+            cell.lunarDay.text = realLunar
+        }else {
+            cell.lunarDay.text = ""
+        }
         cell.date.alpha = 1
         cell.lunarDay.alpha = 1
         

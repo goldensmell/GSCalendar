@@ -3,8 +3,8 @@ import UIKit
 class GSCalendarCommon: NSObject {
     // MARK: - static data
     // 윤달 계산으로 인하여 var로 선언
-    static let months = ["January", "February","March","Aprill","May","June","July","August","September","October","November","December"]
-    static let days = ["Mon","Tue","Wen","Thu","Fri","Sat","Sun"]
+    static let MonthStrings = ["January", "February","March","Aprill","May","June","July","August","September","October","November","December"]
+    static let DayStrings = ["Mon","Tue","Wen","Thu","Fri","Sat","Sun"]
     //["Monday", "Tuesday", "Wendnesday","Thursday","Friday","Saturday","Sunday"]
 }
 
@@ -33,12 +33,36 @@ extension Date {
         return resultDate!
     }
     
+    func yearOfThisDate() -> Int {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy"
+        let result = formatter.string(from: self)
+        
+        return Int(result)!
+    }
+    func monthOfThisDate() -> Int {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM"
+        let result = formatter.string(from: self)
+        
+        return Int(result)!
+    }
     func dayOfThisDate() -> Int {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd"
         let result = formatter.string(from: self)
         
         return Int(result)!
+    }
+    
+    func getDefaultString() -> String{
+        let dateFormatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            return formatter
+        }()
+        
+        return dateFormatter.string(from: self)
     }
     
 }
