@@ -23,12 +23,11 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         setDayUI()
+        setScrollOrient()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        initCalendar()
         
         moveToday()
     }
@@ -43,13 +42,9 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
         }
     }
     
-    //TESTCODE
-    private func initCalendar(){
-         calendar.initLunarData() // 음력 데이터 초기화
-    }
     public func initCalendar(Calendar calendar:GSCalendarModel){
         self.calendar = calendar
-        calendar.initLunarData() // 음력 데이터 초기화
+        
     }
     
     private func moveToday(){
@@ -98,6 +93,18 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
         five.text = calendar.getDayString(3)
         six.text = calendar.getDayString(4)
         seven.text = calendar.getDayString(5)
+    }
+    
+    private func setScrollOrient(){
+        
+        if let layout = calendarCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            if calendar.getScrollOrient() {
+                layout.scrollDirection = .horizontal
+            }else {
+                layout.scrollDirection = .vertical
+            }
+            
+        }
     }
     
     private func moveCurrentSetMonth(){

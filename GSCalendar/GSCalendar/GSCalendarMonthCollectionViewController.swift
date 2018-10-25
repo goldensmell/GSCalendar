@@ -53,8 +53,9 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
 
         let (isThisMonth, solar, lunar) = month.getDay(indexPath.row)
         
-//
-//        cell.isThisMonth = isHidden
+        cell.date.isHidden = false
+        cell.lunarDay.isHidden = false
+        
         cell.date.text = solar
         if let realLunar = lunar {
             cell.lunarDay.text = realLunar
@@ -80,9 +81,14 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
 //                cell.backgroundColor = UIColor.gray
 //            }
         }
+        
         if isThisMonth == false {
             cell.date.textColor = UIColor.lightGray
             
+            if month.getUseDisplayOverMonth() == false{
+                cell.date.isHidden = true
+                cell.lunarDay.isHidden = true
+            }
         }
         
         return cell

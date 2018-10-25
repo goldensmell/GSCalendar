@@ -9,6 +9,8 @@ class GSCalendarMonthModel: NSObject {
     var currentDay = 0
     var firstWeekDayOfMonth = 0 // 첫주의 요일
     
+    var useDisplayOverMonth = true
+    
     var displayTotalDate:Int = 0 // 달력에 표시될 총 날짜
     
     var days:Array<Date> = [Date]() // 양력 날짜
@@ -206,7 +208,10 @@ class GSCalendarMonthModel: NSObject {
         return result
     }
     
-   
+    public func getUseDisplayOverMonth() -> Bool{
+    
+        return useDisplayOverMonth
+    }
 
 }
 

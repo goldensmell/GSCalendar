@@ -18,6 +18,7 @@
 		DA2346892154B5DD00ADBABF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA2346872154B5DD00ADBABF /* LaunchScreen.storyboard */; };
 		DA2346AD2154B71E00ADBABF /* GSCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2346AC2154B71E00ADBABF /* GSCalendarViewController.swift */; };
 		DAB5012F2180484F0088EC60 /* lunar.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAB5012E2180484F0088EC60 /* lunar.txt */; };
+		DAB5013221806B700088EC60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAB5013121806B700088EC60 /* Main.storyboard */; };
 		DAF57E0B217FFE9B00BCE5A6 /* LunarDataManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF57E0A217FFE9B00BCE5A6 /* LunarDataManage.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		DA23469A2154B5DE00ADBABF /* GSCalendarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GSCalendarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA2346AC2154B71E00ADBABF /* GSCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSCalendarViewController.swift; sourceTree = "<group>"; };
 		DAB5012E2180484F0088EC60 /* lunar.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lunar.txt; sourceTree = "<group>"; };
+		DAB5013121806B700088EC60 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		DAF57E0A217FFE9B00BCE5A6 /* LunarDataManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunarDataManage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,16 +105,25 @@
 		DA23467D2154B5DD00ADBABF /* GSCalendar */ = {
 			isa = PBXGroup;
 			children = (
-				DAF57E07217FFD2E00BCE5A6 /* Supporting Files */,
+				DAB5013021806B2D0088EC60 /* GSCalendar */,
 				DA2346802154B5DD00ADBABF /* ViewController.swift */,
+				DAB5013121806B700088EC60 /* Main.storyboard */,
+				DA23468A2154B5DD00ADBABF /* Info.plist */,
+				DAF57E07217FFD2E00BCE5A6 /* Supporting Files */,
+			);
+			path = GSCalendar;
+			sourceTree = "<group>";
+		};
+		DAB5013021806B2D0088EC60 /* GSCalendar */ = {
+			isa = PBXGroup;
+			children = (
 				DA09820D216F0E42004978EC /* GSCalendarCommon.swift */,
-				DA2346AC2154B71E00ADBABF /* GSCalendarViewController.swift */,
-				DA098209216F0ADD004978EC /* GSCalendarMonthCollectionViewController.swift */,
+				DAF57E0A217FFE9B00BCE5A6 /* LunarDataManage.swift */,
 				DA09820F216F1C7C004978EC /* GSCalendarModel.swift */,
 				DA09820B216F0DC7004978EC /* GSCalendarMonthModel.swift */,
-				DAF57E0A217FFE9B00BCE5A6 /* LunarDataManage.swift */,
+				DA2346AC2154B71E00ADBABF /* GSCalendarViewController.swift */,
+				DA098209216F0ADD004978EC /* GSCalendarMonthCollectionViewController.swift */,
 				DA2346822154B5DD00ADBABF /* Calendar.storyboard */,
-				DA23468A2154B5DD00ADBABF /* Info.plist */,
 			);
 			path = GSCalendar;
 			sourceTree = "<group>";
@@ -233,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA2346892154B5DD00ADBABF /* LaunchScreen.storyboard in Resources */,
+				DAB5013221806B700088EC60 /* Main.storyboard in Resources */,
 				DAB5012F2180484F0088EC60 /* lunar.txt in Resources */,
 				DA2346862154B5DD00ADBABF /* Assets.xcassets in Resources */,
 				DA2346842154B5DD00ADBABF /* Calendar.storyboard in Resources */,
