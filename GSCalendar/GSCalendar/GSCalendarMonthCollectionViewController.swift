@@ -50,11 +50,12 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
 //        cell.backgroundColor = UIColor.green        
 //        cell.layer.borderWidth = 1
 //        cell.layer.borderColor = UIColor.black.cgColor
-
-        let (isThisMonth, solar, lunar) = month.getDay(indexPath.row)
         
-        cell.date.isHidden = false
-        cell.lunarDay.isHidden = false
+        let index = indexPath.row
+
+        let (isThisMonth, solar, lunar) = month.getDay(index)
+        
+        cell.setDefaultUI()
         
         cell.date.text = solar
         if let realLunar = lunar {
@@ -63,31 +64,25 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
             cell.lunarDay.text = ""
         }
         
-        // 일요일
         if isThisMonth == true {
+            
+            //오늘
+            cell.setTodayUI(month.checkCurrentDay(index))
+            
+            // 일요일
             if(month.checkSunday(Int(solar)!) == true) {
                 cell.date.textColor = UIColor.red
             }
             // 토요일
             else if(month.checkSaturday(Int(solar)!) == true) {
                 cell.date.textColor = UIColor.blue
-            }else {
-                cell.date.textColor = UIColor.black
             }
-
-            //TODO: 오늘 날짜
-//            if(month.checkCurrentDay(Int(day)!) == true) {
-//                cell.date.textColor = UIColor.white
-//                cell.backgroundColor = UIColor.gray
-//            }
-        }
-        
-        if isThisMonth == false {
+            
+        }else {
             cell.date.textColor = UIColor.lightGray
             
             if month.getUseDisplayOverMonth() == false{
-                cell.date.isHidden = true
-                cell.lunarDay.isHidden = true
+                cell.setHiddenUI()
             }
         }
         
@@ -112,5 +107,27 @@ class GSCalendarMonthCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var lunarDay: UILabel!
+    
+    func setDefaultUI() {
+        date.textColor = UIColor.black
+        date.isHidden = false
+        lunarDay.isHidden = false
+    }
+    
+    func setHiddenUI(){
+        date.isHidden = true
+        lunarDay.isHidden = true
+    }
+    
+    func setTodayUI(_ isToday:Bool){
+        if isToday {
+            date.layer.masksToBounds = true //지정 크기를 넘어가는 이미지 자르기
+            date.layer.cornerRadius = date.frame.size.width / 2 // 라운드 처리
+            date.backgroundColor = UIColor.red
+            date.textColor = UIColor.white
+        }else {
+            date.backgroundColor = UIColor.clear
+        }
+    }
     
 }

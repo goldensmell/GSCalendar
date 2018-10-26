@@ -29,7 +29,7 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        moveToday()
+        setCalendarData()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -44,17 +44,15 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     
     public func initCalendar(Calendar calendar:GSCalendarModel){
         self.calendar = calendar
-        
     }
     
     private func moveToday(){
         let now = Date()
-        setCalendarData(now)
+        calendar.initDate(date: now)
+        setCalendarData()
     }
     
-    private func setCalendarData(_ date:Date){
-       
-        calendar.initDate(date: date)
+    private func setCalendarData(){
         for _ in 0..<calendar.months.count {
             monthVieweControllers.append(nil)
         }
@@ -79,8 +77,9 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     private func reloadCalendarData(_ index:Int){
-        if ( (index == 0) || (index == (calendar.months.count-1)) ){
-            setCalendarData(calendar.currentDate)
+        if (calendar.checkFixPeriod() == false && (index == 0 || (index == (calendar.months.count-1))) ){
+            calendar.initDate()
+            setCalendarData()
             return
         }
     }
@@ -113,7 +112,6 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     
     private func getMonthVC(Index index:Int) -> GSCalendarMonthCollectionViewController?{
 
-        
         if let monthVC = self.storyboard?.instantiateViewController(withIdentifier: "GSCalendarMonthCollectionViewController") as? GSCalendarMonthCollectionViewController {
 //            monthVC.setLunarDatas(index)
             calendar.initLunarDataToMonth(index)

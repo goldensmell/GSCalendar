@@ -194,7 +194,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vw8-2o-fZX">
-                                            <rect key="frame" x="16" y="5" width="12" height="11"/>
+                                            <rect key="frame" x="17" y="5" width="12" height="11"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -202,10 +202,10 @@
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="Vw8-2o-fZX" firstAttribute="leading" secondItem="hTx-sO-MRf" secondAttribute="trailing" constant="4" id="7rr-VO-bAS"/>
-                                    <constraint firstItem="Vw8-2o-fZX" firstAttribute="top" secondItem="hTx-sO-MRf" secondAttribute="top" id="I9Y-lS-cAc"/>
-                                    <constraint firstItem="hTx-sO-MRf" firstAttribute="leading" secondItem="34O-8R-vnf" secondAttribute="leading" constant="5" id="RfQ-Sm-ABf"/>
-                                    <constraint firstItem="hTx-sO-MRf" firstAttribute="top" secondItem="34O-8R-vnf" secondAttribute="top" constant="5" id="e7Y-P3-WtV"/>
+                                    <constraint firstItem="Vw8-2o-fZX" firstAttribute="top" secondItem="hTx-sO-MRf" secondAttribute="top" id="Jmf-Tn-Jy1"/>
+                                    <constraint firstItem="Vw8-2o-fZX" firstAttribute="leading" secondItem="hTx-sO-MRf" secondAttribute="trailing" constant="5" id="MiJ-SC-kGK"/>
+                                    <constraint firstItem="hTx-sO-MRf" firstAttribute="leading" secondItem="34O-8R-vnf" secondAttribute="leading" constant="5" id="Re1-bc-XbI"/>
+                                    <constraint firstItem="hTx-sO-MRf" firstAttribute="top" secondItem="34O-8R-vnf" secondAttribute="top" constant="5" id="wEg-Z5-Fba"/>
                                 </constraints>
                                 <size key="customSize" width="80" height="80"/>
                                 <connections>

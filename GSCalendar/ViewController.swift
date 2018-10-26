@@ -39,7 +39,15 @@ class ViewController: UIViewController {
                 }
                 
                 let model = GSCalendarModel()
-                model.initData(BaseDate: nil, FixPeriod: periodState, OverDisplay: overDisplayState, UseLunar: useLunarDateState, ScrollDirection: scrollDirection)
+                startDate = self.start.titleLabel?.text ?? ""
+                endDate = self.end.titleLabel?.text ?? ""
+                if (startDate == "startDate" || startDate == "") || (endDate  == "endDate" || endDate == "") {
+                    model.initData(BaseDate: nil, FixPeriod: periodState, OverDisplay: overDisplayState, UseLunar: useLunarDateState, ScrollDirection: scrollDirection)
+                }else{
+                    model.initData(BaseDate: nil, FixPeriod: periodState, StartDate: startDate.date!, EndDate: endDate.date!, OverDisplay: overDisplayState, UseLunar: useLunarDateState, ScrollDirection: scrollDirection
+                    )
+                }
+               
                 vc.initCalendar(Calendar: model)
             }
         }

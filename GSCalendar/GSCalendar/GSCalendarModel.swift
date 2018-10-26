@@ -8,13 +8,16 @@ class GSCalendarModel: NSObject {
     var monthStrings = ["January", "February","March","Aprill","May","June","July","August","September","October","November","December"]
     var dayStrings = ["Mon","Tue","Wen","Thu","Fri","Sat","Sun"]
     //["Monday", "Tuesday", "Wendnesday","Thursday","Friday","Saturday","Sunday"]
-    var useLunar: Bool = true
-    var useDisplayOverMonth:Bool = true
-    var fixPeriod:Bool = false
-    var scrollDirection:Bool = true // true - horizon, false - vertical
+    var useLunar: Bool = true // 음력 사용
+    var useDisplayOverMonth:Bool = true // 전월/이월 날짜 같이 표시
+    var fixPeriod:Bool = false // 기간 고정
+    var scrollDirection:Bool = true //스크롤 방향; true - horizon, false - vertical
+    
+    var startDate:Date?
+    var endDate:Date?
     
     var currentDate = Date()
-    var currentIndex = 6 // 컨트롤러에 보여지는 데이터 인덱스 ; 초기화시 오늘 날짜
+    var currentIndex = 1 // 컨트롤러에 보여지는 데이터 인덱스 ; 초기화시 오늘 날짜
     
     var lunarManage = LunarDataManage()
     
@@ -22,6 +25,10 @@ class GSCalendarModel: NSObject {
         if useLunar {
             lunarManage.readLunarData()
         }
+    }
+    
+    public func initDate() {
+        initMonthLists()
     }
     
     public func initDate(date:Date) {
@@ -57,6 +64,9 @@ class GSCalendarModel: NSObject {
     // BaseDate = 먼저 표시될 기준 날짜
     public func initData(BaseDate baseDate:Date?, FixPeriod fixPeriod:Bool,StartDate start:Date, EndDate end:Date,  OverDisplay overDisplay:Bool, UseLunar useLunar:Bool, ScrollDirection direction:Bool) {
         
+        startDate = start
+        endDate = end
+        
         initDefaultDatas(BaseDate: baseDate, FixPeriod: fixPeriod, OverDisplay: overDisplay, UseLunar: useLunar, ScrollDirection:direction)
         
         initLunarData()
@@ -66,17 +76,42 @@ class GSCalendarModel: NSObject {
         
         months = Array<GSCalendarMonthModel>()
         
-        // 기준의 날짜로부터 +- 6개월 데이터 셋팅
-        for i in -12..<12 {
-            let thisDate:Date = currentDate.moveMonthFromDate(move: i)
-
-            let month = GSCalendarMonthModel()
-            month.initDate(SetDate: thisDate)
-            month.useDisplayOverMonth = useDisplayOverMonth
-            months.append(month)
+        if let start = startDate, let end = endDate {
+            
+            // 기간이 정해져 있다면, 시작 일은 시작하는 달
+            currentDate = start
+            currentIndex = 0
+            
+            var index = 0
+            while true{
+                let thisDate:Date = currentDate.moveMonthFromDate(move: index)
+                
+                let month = GSCalendarMonthModel()
+                month.initDate(SetDate: thisDate)
+                month.useDisplayOverMonth = useDisplayOverMonth
+                months.append(month)
+                let result = end.compare(thisDate)
+                if(result == ComparisonResult.orderedSame || result == ComparisonResult.orderedAscending) {
+                    break
+                }
+                
+                index = index + 1
+            }
+            
+            
+        }else {
+            // 기준의 날짜로부터 +- 6개월 데이터 셋팅
+            for i in -12..<12 {
+                let thisDate:Date = currentDate.moveMonthFromDate(move: i)
+                
+                let month = GSCalendarMonthModel()
+                month.initDate(SetDate: thisDate)
+                month.useDisplayOverMonth = useDisplayOverMonth
+                months.append(month)
+            }
+            
+            currentIndex = 12
         }
-
-        currentIndex = 12
     }
     
     public func initLunarDataToMonth(_ index:Int) {
@@ -105,6 +140,10 @@ class GSCalendarModel: NSObject {
     
     public func getScrollOrient()->Bool{
         return scrollDirection
+    }
+    
+    public func checkFixPeriod()->Bool{
+        return fixPeriod
     }
 }
 

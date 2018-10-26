@@ -141,8 +141,6 @@ class GSCalendarMonthModel: NSObject {
 //        return lunar
 //    }
     
-    
-    
     // 표시할 날짜
     public func getDay(_ index:Int) -> (Bool,String,String?) {
         
@@ -160,8 +158,6 @@ class GSCalendarMonthModel: NSObject {
         
         return (isThisMonth,solar, lunar)
     }
-    
-   
     
     // 일요일 체크
     public func checkSunday(_ index:Int) -> Bool{
@@ -201,9 +197,19 @@ class GSCalendarMonthModel: NSObject {
     public func checkCurrentDay(_ index:Int) -> Bool {
         var result = false
         
-        //        if( currentYear == presentYear && currentMonth == presentMonth && index == currentDay){
-        //            result = true
-        //        }
+        let today = Date()
+        let todayYear = today.yearOfThisDate()
+        let todayMonth = today.monthOfThisDate()
+        let todayDay = today.dayOfThisDate()
+        
+        let thisDate = getSolarDay(index)
+        let thisYear = thisDate.yearOfThisDate()
+        let thisMonth = thisDate.monthOfThisDate()
+        let thisDay = thisDate.dayOfThisDate()
+        
+        if( todayYear == thisYear && todayMonth == thisMonth && todayDay == thisDay){
+            result = true
+        }
         
         return result
     }
