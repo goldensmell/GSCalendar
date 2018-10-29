@@ -5,7 +5,7 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     @IBOutlet weak var calendarCollectionView: UICollectionView!
     
     // year & month
-    @IBOutlet weak var current: UILabel!
+    @IBOutlet weak var current: UIButton!
     
     //day
     @IBOutlet weak var one: UILabel!
@@ -52,6 +52,11 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
         setCalendarData()
     }
     
+    private func moveSelectDay(_ date:Date){
+        calendar.initDate(date: date)
+        setCalendarData()
+    }
+    
     private func setCalendarData(){
         for _ in 0..<calendar.months.count {
             monthVieweControllers.append(nil)
@@ -66,7 +71,8 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     private func setTitle(){
-        current.text = calendar.getCurrentMonthString()
+        current.setTitle(calendar.getCurrentMonthString(), for: .normal)
+        current.setTitle(calendar.getCurrentMonthString(), for: .highlighted)
     }
     
     private func setCurrentMonth (_ index:Int){
@@ -113,7 +119,6 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     private func getMonthVC(Index index:Int) -> GSCalendarMonthCollectionViewController?{
 
         if let monthVC = self.storyboard?.instantiateViewController(withIdentifier: "GSCalendarMonthCollectionViewController") as? GSCalendarMonthCollectionViewController {
-//            monthVC.setLunarDatas(index)
             calendar.initLunarDataToMonth(index)
             monthVC.setinit(month: calendar.months[index])
             var frame = calendarCollectionView.frame
@@ -132,6 +137,23 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     
     @IBAction func moveToday(_ sender: UIButton) {
         moveToday()
+    }
+    
+    @IBAction func selectDate(_ sender: UIButton) {
+        let alert = UIAlertController(title: "날짜 선택", message: "\n\n\n\n\n\n", preferredStyle: UIAlertController.Style.actionSheet)
+        alert.isModalInPopover = true
+        
+        let datePicker = UIDatePicker.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 200))
+        datePicker.datePickerMode = .date
+        
+        alert.view.addSubview(datePicker)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: {(alert: UIAlertAction!) -> Void in
+            self.moveSelectDay(datePicker.date)
+        })
+        alert.addAction(okAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
+        alert.addAction(cancelAction)
+        self.parent!.present(alert, animated: true, completion: { })
     }
     
     //MARK: - COLLECTION VIEW METHOD

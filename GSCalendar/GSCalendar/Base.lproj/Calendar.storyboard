@@ -24,12 +24,13 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nUa-I8-bot">
                                         <rect key="frame" x="0.0" y="10" width="375" height="90"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SN9-f3-sGx">
-                                                <rect key="frame" x="166.5" y="0.0" width="42" height="50"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjd-jE-jcu">
+                                                <rect key="frame" x="168" y="0.0" width="39" height="50"/>
+                                                <state key="normal" title="년 / 월"/>
+                                                <connections>
+                                                    <action selector="selectDate:" destination="BMZ-ik-zWx" eventType="touchUpInside" id="tM6-T3-E0Y"/>
+                                                </connections>
+                                            </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="tF7-UO-Kkn">
                                                 <rect key="frame" x="0.0" y="60" width="375" height="30"/>
                                                 <subviews>
@@ -151,7 +152,7 @@
                     </view>
                     <connections>
                         <outlet property="calendarCollectionView" destination="1zC-0A-4gC" id="R1D-K4-F5K"/>
-                        <outlet property="current" destination="SN9-f3-sGx" id="4BB-sD-5PR"/>
+                        <outlet property="current" destination="gjd-jE-jcu" id="nCr-aS-7zA"/>
                         <outlet property="five" destination="JNj-sN-GHQ" id="Lu6-JT-sBj"/>
                         <outlet property="four" destination="TBn-8z-Eee" id="wdj-3E-Mz8"/>
                         <outlet property="one" destination="jpL-fy-XmW" id="Cvn-aK-IfZ"/>

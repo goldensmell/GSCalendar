@@ -5,6 +5,7 @@ class GSCalendarModel: NSObject {
     var months = Array<GSCalendarMonthModel>()
     
     // 기본 설정 값들
+    var defaultDisplayDistance = 12 // 기본 보여질 기준 월로 부터의 +,- 기간
     var monthStrings = ["January", "February","March","Aprill","May","June","July","August","September","October","November","December"]
     var dayStrings = ["Mon","Tue","Wen","Thu","Fri","Sat","Sun"]
     //["Monday", "Tuesday", "Wendnesday","Thursday","Friday","Saturday","Sunday"]
@@ -61,6 +62,16 @@ class GSCalendarModel: NSObject {
         initLunarData()
     }
     
+    public func initData(BaseDate baseDate:Date?) {
+        
+        startDate = nil
+        endDate = nil
+        
+        initDefaultDatas(BaseDate: baseDate, FixPeriod: fixPeriod, OverDisplay: useDisplayOverMonth, UseLunar: useLunar, ScrollDirection:scrollDirection)
+        
+        initLunarData()
+    }
+    
     // BaseDate = 먼저 표시될 기준 날짜
     public func initData(BaseDate baseDate:Date?, FixPeriod fixPeriod:Bool,StartDate start:Date, EndDate end:Date,  OverDisplay overDisplay:Bool, UseLunar useLunar:Bool, ScrollDirection direction:Bool) {
         
@@ -101,7 +112,7 @@ class GSCalendarModel: NSObject {
             
         }else {
             // 기준의 날짜로부터 +- 6개월 데이터 셋팅
-            for i in -12..<12 {
+            for i in -(defaultDisplayDistance)..<defaultDisplayDistance {
                 let thisDate:Date = currentDate.moveMonthFromDate(move: i)
                 
                 let month = GSCalendarMonthModel()
@@ -110,7 +121,7 @@ class GSCalendarModel: NSObject {
                 months.append(month)
             }
             
-            currentIndex = 12
+            currentIndex = defaultDisplayDistance
         }
     }
     
