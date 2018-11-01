@@ -59,14 +59,7 @@ extension Date {
         }()
         
         return dateFormatter.string(from: self)
-    }
-    
-    // compare to date
-    func compareDateOfMonth(Date date:Date) -> Int {
-        let diff = self.timeIntervalSince(date) / 60*60*24
-        return Int(diff)
-    }
-    
+    }    
 }
 
 //get date from string

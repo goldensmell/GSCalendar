@@ -146,6 +146,13 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
         let datePicker = UIDatePicker.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 200))
         datePicker.datePickerMode = .date
         
+        if calendar.checkFixPeriod() {
+            if let start = calendar.startDate, let end = calendar.endDate {
+                datePicker.minimumDate = start
+                datePicker.maximumDate = end
+            }
+        }
+        
         alert.view.addSubview(datePicker)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: {(alert: UIAlertAction!) -> Void in
             self.moveSelectDay(datePicker.date)

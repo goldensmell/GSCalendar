@@ -99,7 +99,7 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //print("didSelectItemAt - \(indexPath.row)")
+        print("didSelectItemAt - \(indexPath.row)")
     }
 }
 

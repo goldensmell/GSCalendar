@@ -83,46 +83,71 @@ class GSCalendarModel: NSObject {
         initLunarData()
     }
     
+    private func chcekSameMonth(_ date:Date) -> Bool {
+        
+        var result = false
+        
+        let currentYear = currentDate.yearOfThisDate()
+        let currentMonth = currentDate.monthOfThisDate()
+        
+        let thisYear = date.yearOfThisDate()
+        let thisMonth = date.monthOfThisDate()
+        
+        if( currentYear == thisYear && currentMonth == thisMonth ){
+            result = true
+        }
+        
+        return result
+    }
+    
     private func initMonthLists() {
         
         months = Array<GSCalendarMonthModel>()
         
-        if let start = startDate, let end = endDate {
-            
-            // 기간이 정해져 있다면, 시작 일은 시작하는 달
-            currentDate = start
-            currentIndex = 0
-            
-            var index = 0
-            while true{
-                let thisDate:Date = currentDate.moveMonthFromDate(move: index)
+        if checkFixPeriod() == true {
+            if let start = startDate, let end = endDate {
                 
-                let month = GSCalendarMonthModel()
-                month.initDate(SetDate: thisDate)
-                month.useDisplayOverMonth = useDisplayOverMonth
-                months.append(month)
-                let result = end.compare(thisDate)
-                if(result == ComparisonResult.orderedSame || result == ComparisonResult.orderedAscending) {
-                    break
+                // 설정한 날짜가 기간을 벚어나는 경우 시작 일은 시작하는 달
+                if(start > currentDate || end < currentDate){
+                    currentDate = start
                 }
                 
-                index = index + 1
-            }
-            
-            
-        }else {
-            // 기준의 날짜로부터 +- 6개월 데이터 셋팅
-            for i in -(defaultDisplayDistance)..<defaultDisplayDistance {
-                let thisDate:Date = currentDate.moveMonthFromDate(move: i)
+                var index = 0
+                while true{
+                    let thisDate:Date = start.moveMonthFromDate(move: index)
+                    
+                    // index 설정
+                    if chcekSameMonth(thisDate) {
+                        currentIndex = index
+                    }
+                    
+                    let month = GSCalendarMonthModel()
+                    month.initDate(SetDate: thisDate)
+                    month.setPeriodDate(Start: start, End: end)
+                    month.useDisplayOverMonth = useDisplayOverMonth
+                    months.append(month)
+                    if(thisDate >= end) {
+                        break
+                    }
+                    
+                    index = index + 1
+                }
                 
-                let month = GSCalendarMonthModel()
-                month.initDate(SetDate: thisDate)
-                month.useDisplayOverMonth = useDisplayOverMonth
-                months.append(month)
+                return
             }
-            
-            currentIndex = defaultDisplayDistance
         }
+        
+        // 기준의 날짜로부터 +- (지정한)개월 데이터 셋팅
+        for i in -(defaultDisplayDistance)..<defaultDisplayDistance {
+            let thisDate:Date = currentDate.moveMonthFromDate(move: i)
+            
+            let month = GSCalendarMonthModel()
+            month.initDate(SetDate: thisDate)
+            month.useDisplayOverMonth = useDisplayOverMonth
+            months.append(month)
+        }
+        
+        currentIndex = defaultDisplayDistance
     }
     
     public func initLunarDataToMonth(_ index:Int) {

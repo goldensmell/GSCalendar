@@ -16,6 +16,10 @@ class GSCalendarMonthModel: NSObject {
     var days:Array<Date> = [Date]() // 양력 날짜
     var lunarDays:Array<String?>? // 음력 날짜
     
+    // 설정 date
+    var startDate:Date?
+    var endDate:Date?
+    
     enum MonthType {
         case Before
         case Current
@@ -40,6 +44,24 @@ class GSCalendarMonthModel: NSObject {
         setSolarDates()
         
         currentDay = Calendar.current.component(.day, from: date)
+    }
+    
+    func setPeriodDate(Start start:Date, End end:Date){
+        startDate = start
+        endDate = end
+    }
+    
+    func checkInPeriodDate(index:Int) -> Bool {
+        
+        let thisDate = getSolarDay(index)
+        
+        if let start = startDate, let end = endDate {
+            if (start <= thisDate && thisDate <= end){
+                return true
+            }
+        }
+        
+        return false
     }
     
     private func setSolarDates(){
@@ -115,32 +137,6 @@ class GSCalendarMonthModel: NSObject {
         return date
     }
     
-    
-//    private func getLunarDayString(_ index:Int) -> (String) {
-//        var lunar = ""
-//        var date = Date()
-//
-//        if(index <= firstWeekDayOfMonth - 2){
-//            let diffDateNum = index - firstWeekDayOfMonth + 2 - 1
-//            let firstDate = "\(currentYear)-\(currentMonth)-1"
-//            date = ("\(firstDate)".date?.addDayFromDate(addDay: diffDateNum))!
-//
-//        }else if(index > numOfDaysInMonth[currentMonth-1] + firstWeekDayOfMonth - 2){
-//            let diffDateNum = index - (numOfDaysInMonth[currentMonth-1] + firstWeekDayOfMonth - 2)
-//            let lastDate = "\(currentYear)-\(currentMonth)-\(getRealDateOfMonth())"
-//            date = ("\(lastDate)".date?.addDayFromDate(addDay: diffDateNum))!
-//        }else {
-//            let calcDate = index-firstWeekDayOfMonth+2
-//            date = ("\(currentYear)-\(currentMonth)-\(calcDate)".date)!
-//        }
-//
-//        let lunarManage = Lunar()
-//        let lunarDateDic = lunarManage.solar2lunar(solar_date: date)
-//        lunar = "\(lunarDateDic["month"]!).\(lunarDateDic["day"]!)"
-//
-//        return lunar
-//    }
-    
     // 표시할 날짜
     public func getDay(_ index:Int) -> (Bool,String,String?) {
         
@@ -151,9 +147,15 @@ class GSCalendarMonthModel: NSObject {
             lunar = "\(lunarDate.monthOfThisDate()).\(lunarDate.dayOfThisDate())"
         }
         
+        // 현재 월에 포함 된 날짜인지 확인
         if(index > firstWeekDayOfMonth - 2 && index <= numOfDaysInMonth[currentMonth-1] + firstWeekDayOfMonth - 2){
-            
-             isThisMonth = true
+            if startDate != nil && endDate != nil {
+                if checkInPeriodDate(index: index) {
+                    isThisMonth = true
+                }
+            }else{
+                isThisMonth = true
+            }
         }
         
         return (isThisMonth,solar, lunar)
