@@ -195,7 +195,7 @@ class GSCalendarMonthModel: NSObject {
         return result
     }
     
-    //TODO: 오늘 날짜 check
+    // 오늘 날짜 check
     public func checkCurrentDay(_ index:Int) -> Bool {
         var result = false
         
