@@ -16,7 +16,7 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
     @IBOutlet weak var six: UILabel!
     @IBOutlet weak var seven: UILabel!
     
-    var calendar :GSCalendarModel = GSCalendarModel()
+    var calendar :GSCalendar = GSCalendar()
     
     var monthVieweControllers:[GSCalendarMonthCollectionViewController?] = Array<GSCalendarMonthCollectionViewController>()
     
@@ -42,7 +42,7 @@ class GSCalendarViewController: UIViewController, UICollectionViewDataSource, UI
         }
     }
     
-    public func initCalendar(Calendar calendar:GSCalendarModel){
+    public func initCalendar(Calendar calendar:GSCalendar){
         self.calendar = calendar
     }
     

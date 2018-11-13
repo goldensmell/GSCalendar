@@ -1,8 +1,8 @@
 import Foundation
 
-class GSCalendarModel: NSObject {
+class GSCalendar: NSObject {
     
-    var months = Array<GSCalendarMonthModel>()
+    var months = Array<GSMonthManage>()
     
     // 기본 설정 값들
     var defaultDisplayDistance = 12 // 기본 보여질 기준 월로 부터의 +,- 기간
@@ -102,7 +102,7 @@ class GSCalendarModel: NSObject {
     
     private func initMonthLists() {
         
-        months = Array<GSCalendarMonthModel>()
+        months = Array<GSMonthManage>()
         
         if checkFixPeriod() == true {
             if let start = startDate, let end = endDate {
@@ -121,7 +121,7 @@ class GSCalendarModel: NSObject {
                         currentIndex = index
                     }
                     
-                    let month = GSCalendarMonthModel()
+                    let month = GSMonthManage()
                     month.initDate(SetDate: thisDate)
                     month.setPeriodDate(Start: start, End: end)
                     month.useDisplayOverMonth = useDisplayOverMonth
@@ -141,7 +141,7 @@ class GSCalendarModel: NSObject {
         for i in -(defaultDisplayDistance)..<defaultDisplayDistance {
             let thisDate:Date = currentDate.moveMonthFromDate(move: i)
             
-            let month = GSCalendarMonthModel()
+            let month = GSMonthManage()
             month.initDate(SetDate: thisDate)
             month.useDisplayOverMonth = useDisplayOverMonth
             months.append(month)

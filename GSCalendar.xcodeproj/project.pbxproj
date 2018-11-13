@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		DA09820A216F0ADD004978EC /* GSCalendarMonthCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA098209216F0ADD004978EC /* GSCalendarMonthCollectionViewController.swift */; };
-		DA09820C216F0DC7004978EC /* GSCalendarMonthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA09820B216F0DC7004978EC /* GSCalendarMonthModel.swift */; };
+		DA09820C216F0DC7004978EC /* GSMonthManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA09820B216F0DC7004978EC /* GSMonthManage.swift */; };
 		DA09820E216F0E42004978EC /* GSCalendarCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA09820D216F0E42004978EC /* GSCalendarCommon.swift */; };
-		DA098210216F1C7C004978EC /* GSCalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA09820F216F1C7C004978EC /* GSCalendarModel.swift */; };
+		DA098210216F1C7C004978EC /* GSCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA09820F216F1C7C004978EC /* GSCalendar.swift */; };
 		DA23467F2154B5DD00ADBABF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23467E2154B5DD00ADBABF /* AppDelegate.swift */; };
 		DA2346812154B5DD00ADBABF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2346802154B5DD00ADBABF /* ViewController.swift */; };
 		DA2346842154B5DD00ADBABF /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA2346822154B5DD00ADBABF /* Calendar.storyboard */; };
@@ -19,8 +19,6 @@
 		DA2346AD2154B71E00ADBABF /* GSCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2346AC2154B71E00ADBABF /* GSCalendarViewController.swift */; };
 		DAB5012F2180484F0088EC60 /* lunar.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAB5012E2180484F0088EC60 /* lunar.txt */; };
 		DAB5013221806B700088EC60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAB5013121806B700088EC60 /* Main.storyboard */; };
-		DAF0A8B5218307DC00855CB3 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAF0A8B4218307DC00855CB3 /* NotificationCenter.framework */; };
-		DAF0A8BF218307DC00855CB3 /* Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DAF0A8B2218307DC00855CB3 /* Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DAF57E0B217FFE9B00BCE5A6 /* LunarDataManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF57E0A217FFE9B00BCE5A6 /* LunarDataManage.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,13 +37,6 @@
 			remoteGlobalIDString = DA23467A2154B5DD00ADBABF;
 			remoteInfo = GSCalendar;
 		};
-		DAF0A8BD218307DC00855CB3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DA2346732154B5DD00ADBABF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DAF0A8B1218307DC00855CB3;
-			remoteInfo = Widget;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -55,7 +46,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				DAF0A8BF218307DC00855CB3 /* Widget.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,9 +54,9 @@
 
 /* Begin PBXFileReference section */
 		DA098209216F0ADD004978EC /* GSCalendarMonthCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSCalendarMonthCollectionViewController.swift; sourceTree = "<group>"; };
-		DA09820B216F0DC7004978EC /* GSCalendarMonthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSCalendarMonthModel.swift; sourceTree = "<group>"; };
+		DA09820B216F0DC7004978EC /* GSMonthManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSMonthManage.swift; sourceTree = "<group>"; };
 		DA09820D216F0E42004978EC /* GSCalendarCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSCalendarCommon.swift; sourceTree = "<group>"; };
-		DA09820F216F1C7C004978EC /* GSCalendarModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSCalendarModel.swift; sourceTree = "<group>"; };
+		DA09820F216F1C7C004978EC /* GSCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSCalendar.swift; sourceTree = "<group>"; };
 		DA23467B2154B5DD00ADBABF /* GSCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GSCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA23467E2154B5DD00ADBABF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA2346802154B5DD00ADBABF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -79,7 +69,6 @@
 		DA2346AC2154B71E00ADBABF /* GSCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSCalendarViewController.swift; sourceTree = "<group>"; };
 		DAB5012E2180484F0088EC60 /* lunar.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lunar.txt; sourceTree = "<group>"; };
 		DAB5013121806B700088EC60 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		DAF0A8B2218307DC00855CB3 /* Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Widget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAF0A8B4218307DC00855CB3 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		DAF57E0A217FFE9B00BCE5A6 /* LunarDataManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunarDataManage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,14 +95,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DAF0A8AF218307DC00855CB3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DAF0A8B5218307DC00855CB3 /* NotificationCenter.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -132,7 +113,6 @@
 				DA23467B2154B5DD00ADBABF /* GSCalendar.app */,
 				DA23468F2154B5DE00ADBABF /* GSCalendarTests.xctest */,
 				DA23469A2154B5DE00ADBABF /* GSCalendarUITests.xctest */,
-				DAF0A8B2218307DC00855CB3 /* Widget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -154,8 +134,8 @@
 			children = (
 				DA09820D216F0E42004978EC /* GSCalendarCommon.swift */,
 				DAF57E0A217FFE9B00BCE5A6 /* LunarDataManage.swift */,
-				DA09820F216F1C7C004978EC /* GSCalendarModel.swift */,
-				DA09820B216F0DC7004978EC /* GSCalendarMonthModel.swift */,
+				DA09820F216F1C7C004978EC /* GSCalendar.swift */,
+				DA09820B216F0DC7004978EC /* GSMonthManage.swift */,
 				DA2346AC2154B71E00ADBABF /* GSCalendarViewController.swift */,
 				DA098209216F0ADD004978EC /* GSCalendarMonthCollectionViewController.swift */,
 				DA2346822154B5DD00ADBABF /* Calendar.storyboard */,
@@ -197,7 +177,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				DAF0A8BE218307DC00855CB3 /* PBXTargetDependency */,
 			);
 			name = GSCalendar;
 			productName = GSCalendar;
@@ -240,23 +219,6 @@
 			productReference = DA23469A2154B5DE00ADBABF /* GSCalendarUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		DAF0A8B1218307DC00855CB3 /* Widget */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DAF0A8C2218307DC00855CB3 /* Build configuration list for PBXNativeTarget "Widget" */;
-			buildPhases = (
-				DAF0A8AE218307DC00855CB3 /* Sources */,
-				DAF0A8AF218307DC00855CB3 /* Frameworks */,
-				DAF0A8B0218307DC00855CB3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Widget;
-			productName = Widget;
-			productReference = DAF0A8B2218307DC00855CB3 /* Widget.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -278,9 +240,6 @@
 						CreatedOnToolsVersion = 10.0;
 						TestTargetID = DA23467A2154B5DD00ADBABF;
 					};
-					DAF0A8B1218307DC00855CB3 = {
-						CreatedOnToolsVersion = 10.0;
-					};
 				};
 			};
 			buildConfigurationList = DA2346762154B5DD00ADBABF /* Build configuration list for PBXProject "GSCalendar" */;
@@ -299,7 +258,6 @@
 				DA23467A2154B5DD00ADBABF /* GSCalendar */,
 				DA23468E2154B5DE00ADBABF /* GSCalendarTests */,
 				DA2346992154B5DE00ADBABF /* GSCalendarUITests */,
-				DAF0A8B1218307DC00855CB3 /* Widget */,
 			);
 		};
 /* End PBXProject section */
@@ -331,13 +289,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DAF0A8B0218307DC00855CB3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -345,11 +296,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA09820C216F0DC7004978EC /* GSCalendarMonthModel.swift in Sources */,
+				DA09820C216F0DC7004978EC /* GSMonthManage.swift in Sources */,
 				DA09820A216F0ADD004978EC /* GSCalendarMonthCollectionViewController.swift in Sources */,
 				DA2346812154B5DD00ADBABF /* ViewController.swift in Sources */,
 				DA23467F2154B5DD00ADBABF /* AppDelegate.swift in Sources */,
-				DA098210216F1C7C004978EC /* GSCalendarModel.swift in Sources */,
+				DA098210216F1C7C004978EC /* GSCalendar.swift in Sources */,
 				DAF57E0B217FFE9B00BCE5A6 /* LunarDataManage.swift in Sources */,
 				DA09820E216F0E42004978EC /* GSCalendarCommon.swift in Sources */,
 				DA2346AD2154B71E00ADBABF /* GSCalendarViewController.swift in Sources */,
@@ -370,13 +321,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DAF0A8AE218307DC00855CB3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -389,11 +333,6 @@
 			isa = PBXTargetDependency;
 			target = DA23467A2154B5DD00ADBABF /* GSCalendar */;
 			targetProxy = DA23469B2154B5DE00ADBABF /* PBXContainerItemProxy */;
-		};
-		DAF0A8BE218307DC00855CB3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DAF0A8B1218307DC00855CB3 /* Widget */;
-			targetProxy = DAF0A8BD218307DC00855CB3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -653,46 +592,6 @@
 			};
 			name = Release;
 		};
-		DAF0A8C0218307DC00855CB3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T29BN4NUF2;
-				INFOPLIST_FILE = Widget/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.goldensmell.GSCalendar.Widget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		DAF0A8C1218307DC00855CB3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T29BN4NUF2;
-				INFOPLIST_FILE = Widget/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.goldensmell.GSCalendar.Widget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -728,15 +627,6 @@
 			buildConfigurations = (
 				DA2346AA2154B5DE00ADBABF /* Debug */,
 				DA2346AB2154B5DE00ADBABF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DAF0A8C2218307DC00855CB3 /* Build configuration list for PBXNativeTarget "Widget" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DAF0A8C0218307DC00855CB3 /* Debug */,
-				DAF0A8C1218307DC00855CB3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

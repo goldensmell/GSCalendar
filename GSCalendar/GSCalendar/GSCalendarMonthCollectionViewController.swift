@@ -4,7 +4,7 @@ private let reuseIdentifier = "GSCalendarCollectionViewCell"
 
 class GSCalendarMonthCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
     
-    var month:GSCalendarMonthModel = GSCalendarMonthModel()
+    var month:GSMonthManage = GSMonthManage()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,7 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
         //self.collectionView.reloadData()
     }
     
-    func setinit(month:GSCalendarMonthModel) {
+    func setinit(month:GSMonthManage) {
         
         self.month = month
         
@@ -64,11 +64,10 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
             cell.lunarDay.text = ""
         }
         
+        //오늘
+        cell.setTodayUI(month.checkCurrentDay(index))
+        
         if isThisMonth == true {
-            
-            //오늘
-            cell.setTodayUI(month.checkCurrentDay(index))
-            
             // 일요일
             if(month.checkSunday(Int(solar)!) == true) {
                 cell.date.textColor = UIColor.red
@@ -77,7 +76,6 @@ class GSCalendarMonthCollectionViewController: UICollectionViewController, UICol
             else if(month.checkSaturday(Int(solar)!) == true) {
                 cell.date.textColor = UIColor.blue
             }
-            
         }else {
             cell.date.textColor = UIColor.lightGray
             
@@ -126,7 +124,7 @@ class GSCalendarMonthCollectionViewCell: UICollectionViewCell {
             date.backgroundColor = UIColor.red
             date.textColor = UIColor.white
         }else {
-            date.backgroundColor = UIColor.clear
+            date.backgroundColor = UIColor.white
         }
     }
     

@@ -38,7 +38,7 @@ class ViewController: UIViewController {
                         break
                 }
                 
-                let model = GSCalendarModel()
+                let model = GSCalendar()
                 startDate = self.start.titleLabel?.text ?? ""
                 endDate = self.end.titleLabel?.text ?? ""
                 if (startDate == "startDate" || startDate == "") || (endDate  == "endDate" || endDate == "") {

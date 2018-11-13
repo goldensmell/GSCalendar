@@ -1,6 +1,6 @@
 import UIKit
 
-class GSCalendarMonthModel: NSObject {
+class GSMonthManage: NSObject {
     
     var numOfDaysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31]
     
@@ -210,6 +210,7 @@ class GSCalendarMonthModel: NSObject {
         let thisDay = thisDate.dayOfThisDate()
         
         if( todayYear == thisYear && todayMonth == thisMonth && todayDay == thisDay){
+            print(index)
             result = true
         }
         
